@@ -1,0 +1,155 @@
+body
+  font-style: inherit
+.week_block
+  position: relative
+  width: 1200px
+  margin: 0 auto
+
+ol, li
+  padding: 0
+  margin: 0
+  list-style: none
+.activity-chart, h1
+  color: #525252
+
+.days li,
+[data-activity='0']
+  background: #eee
+
+.activity-chart
+  width: 720px
+  height: 205px
+  padding-left: 110px
+  margin: 50px 150px
+  position: relative
+
+
+.days-of-week
+  width: 15px
+  position: absolute
+  top: 45.5px
+  font-size: 10px
+  font-weight: 400
+  color: #959494
+  li:nth-child(2)
+    margin: 17px 0
+
+@-moz-document url-prefix()
+  .days-of-week
+    left: 23px
+
+.month
+  ol
+    position: absolute
+    top: 22px
+  li
+    float: right
+    margin-left: 37px
+    color: #959494
+    font-size: 12px
+    font-weight: 400
+
+
+.days
+  font-size: 0.75em
+
+
+.activity-chart .offset
+  &:hover
+    outline: none
+  background: none
+
+
+.week
+  width: 108px
+  transform: rotate(90deg)
+  transform-origin: top left
+  position: absolute
+  top: 100%
+  left: 66.3%
+  margin-top: 26px
+  margin-left: 0
+
+.days li, .key li
+  width: 12px
+  height: 12px
+  float: right
+
+.days
+  .bold
+    font-weight: bold
+  li
+    margin: 1.5px
+
+
+.activity-chart
+  [data-activity='1']
+    background: #d6e685
+  [data-activity='2']
+    background: #8cc665
+  [data-activity='3']
+    background: #44a340
+  [data-activity='4']
+    background: #1e6823
+
+
+.background_block
+  width: 168px
+  height: 15px
+  display: flex
+  align-items: center
+  position: relative
+  top: 165px
+  > p
+    font-size: 10px
+    font-weight: 400
+    color: #959494
+  .list
+    display: flex
+    > p
+      width: 15px
+      height: 15px
+      margin-right: 2px
+      margin-left: 2px
+
+
+.days li
+  .tooltip
+    display: none
+  &:hover
+    position: relative
+    z-index: 3
+    .tooltip
+      transform: rotate(-90deg)
+      display: block
+      position: absolute
+      top: -13px
+      left: -85px
+      width: 100px
+      padding: 10px 5px
+      text-align: center
+      background-color: #333
+      color: #f1f1f1
+      border-radius: 8px
+
+      .tooltip_title
+        color: #FFFFFF
+        font-size: 12px
+        font-weight: 400
+
+      .tooltip_text
+        color: #7C7C7C
+        font-size: 10px
+        font-weight: 400
+
+.tooltip:before
+  content: ""
+  position: absolute
+  border-radius: 8px
+  width: 0
+  height: 0
+  bottom: -10px
+  right: 50px
+  border-left: 5px solid transparent
+  border-right: 5px solid transparent
+  border-top: 11px solid #333
