@@ -11,17 +11,20 @@ interface DateCount {
 const App: React.FC = () => {
     const [days, setDays] = useState<string[]>([]);
     const [months, setMonths] = useState<string[]>([]);
-
+    const [loading, setLoading] = useState(false);
     const [calendar, setCalendar] = useState<DateCount | null>(null);
 
     useEffect(() => {
+        setLoading(true)
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://dpg.gg/test/calendar.json');
                 const data = response.data;
                 setCalendar(data);
+                setLoading(false)
             } catch (error) {
                 console.log(error);
+                setLoading(false)
             }
         };
 
@@ -66,6 +69,9 @@ const App: React.FC = () => {
         event.currentTarget.setAttribute('data-activity', nextStep.toString());
     };
 
+    if (loading) {
+        return <h3>Загрузка...</h3>
+    }
     return (
         <div className='week_block'>
             <ol className="days-of-week">
@@ -84,7 +90,7 @@ const App: React.FC = () => {
                 <ol>
                     <div className='week'>
                         {days.map((day, index) => {
-                            const date = moment("2022-11-03");
+                            const date = moment(day);
                             const formattedDate = date.format("dddd, MMMM D, YYYY");
                             if (calendar && calendar[day] <= 9) {
                                 return <li key={index} onClick={cycleColor} style={{
@@ -128,10 +134,12 @@ const App: React.FC = () => {
                             }
 
                             if (calendar && calendar[day] >= 30) {
-                                return <li key={index} onClick={cycleColor}>
+                                return <li key={index} onClick={cycleColor} style={{
+                                    background: '#254E77'
+                                }}>
                                     <span className="tooltip">
                                         <span className='tooltip_title'>
-                                            {calendar?.[day] ?? 0} contributions
+                                            30+ contributions
                                     </span>
                                         <br/>
                                     <span className="tooltip_text">{formattedDate}</span>
